@@ -42,6 +42,8 @@
 								    	}
 								    ?>
 								    </select>
+								    <br>
+								    <a href='<?php echo admin_url(); ?>user-new.php'>Tambah</a>
 							  	</div>
 							  	<div class="form-group">
 								    <label for="tipe-laundry">Tipe Laundry</label>
