@@ -173,6 +173,7 @@
 								    <select class="form-control" id="ac-harga-laundry-satuan">
 								    	<option value="kg">kg</option>
 								    	<option value="pcs">pcs</option>
+								    	<option value="meter">meter</option>
 								    </select>
 							  	</div>
 							  	<button type="submit" class="btn btn-primary" id="ac-input-harga-service">Submit</button>
@@ -281,6 +282,7 @@
 							$total_persentase = 0;
 							if(!empty($lama_service)){
 								foreach ($lama_service as $lama){
+									$total_persentase = 0;
 									$total_harga = 0;
 									if(!empty($harga_service_laundry)){
 										foreach ($harga_service_laundry as $k1 => $harga_service) {
@@ -298,7 +300,7 @@
 																){
 																	$new_harga = ($harga_service['harga']/100)*$bagi_hasil;
 																	$total_harga += ($new_harga*$persentase['persentase'])/100;
-																	if($k1 == 0){
+																	if($v['id'] == $harga_service['tipe_laundry']){
 																		$total_persentase += $persentase['persentase'];
 																	}
 																	break;
