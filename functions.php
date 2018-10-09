@@ -262,6 +262,26 @@ function insert_default_value_laundry(){
     ) );
 }
 
+function update_status_laundry(){
+    global $wpdb;
+    $ret = array( 'error' => true );
+    if(!empty($_POST)){
+        if(empty($_POST['id'])){
+            $ret['msg'] = 'ID transkasi tidak boleh kosong!';
+        } else if(empty($_POST['status'])){
+            $ret['msg'] = 'Status tidak boleh kosong!';
+        }
+        if(empty($ret['msg'])){
+            $data = array( 'status' => $_POST['status'] );
+            $wpdb->update($wpdb->prefix.'transaksi_laundry', $data, array( 'id' =>  $_POST['id']));
+            $ret['error'] = false;
+            $ret['msg'] = 'Success update status transaksi!';
+        }
+    }
+    echo json_encode($ret);
+    wp_die();
+}
+
 function update_bagi_hasil(){
     $ret = array( 'error' => true );
     if(!empty($_POST)){
@@ -631,7 +651,49 @@ function input_transaksi_customer(){
                 $data['tambahan_harga'] = $_POST['tambahan_harga_laundry'];
             }
             $wpdb->insert($wpdb->prefix.'transaksi_laundry', $data);
+            $ret['sql'] = $wpdb->last_query;
             $ret['msg'] = 'Success insert transaksi laundry!';
+            $ret['error'] = false;
+        }
+    }
+    if($ret['error'] && empty($ret['msg'])){
+        $ret['msg'] = 'Error, harap hubungi admin!';
+    }
+    echo json_encode($ret);
+    wp_die();
+}
+
+function input_transaksi_karyawan(){
+    global $wpdb;
+    $ret = array( 'error' => true );
+    if(!empty($_POST)){
+        if(empty($_POST['customer_laundry'])){
+            $ret['msg'] = 'Customer Laundry kosong!';
+        }
+        if(empty($_POST['karyawan_laundry'])){
+            $ret['msg'] = 'Karyawan Laundry kosong!';
+        }
+        if(empty($_POST['tipe_laundry'])){
+            $ret['msg'] = 'Tipe Diskon Laundry kosong!';
+        }
+        if(empty($_POST['lama_laundry'])){
+            $ret['msg'] = 'Lama Laundry kosong!';
+        }
+        if(empty($_POST['waktu_laundry'])){
+            $ret['msg'] = 'Waktu Laundry kosong!';
+        }
+        $waktu_laundry=date_create($_POST['waktu_laundry']);
+        if(empty($ret['msg'])){
+            $data = array(
+                'customer_id' => $_POST['customer_laundry'],
+                'pekerja_id' => $_POST['pekerja_laundry'],
+                'jenis_pekerjaan' => $_POST['tipe_laundry'],
+                'transaksi_id' => '',
+                'waktu_pengerjaan' => date_format($waktu_laundry,"Y-m-d H:i:s")
+            );
+            $wpdb->insert($wpdb->prefix.'transaksi_pekerja_laundry', $data);
+            $ret['sql'] = $wpdb->last_query;
+            $ret['msg'] = 'Success insert transaksi karyawan!';
             $ret['error'] = false;
         }
     }
@@ -681,7 +743,7 @@ function load_custom_script_admin($hook) {
     wp_enqueue_script( 'jquery-dataTables-min', plugin_dir_url( __FILE__ ) . '/js/jquery.dataTables.min.js', array( 'jquery' ) );
     wp_enqueue_script( 'moment-min', plugin_dir_url( __FILE__ ) . '/js/moment.min.js', array( 'jquery' ) );
     wp_enqueue_script( 'bootstrap-datetimepicker-min', plugin_dir_url( __FILE__ ) . '/js/bootstrap-datetimepicker.min.js', array( 'jquery' ) );
-    wp_enqueue_script( 'custom-laundry', plugin_dir_url( __FILE__ ) . '/js/custom.js', array( 'jquery' ) );
+    wp_enqueue_script( 'custom-laundry', plugin_dir_url( __FILE__ ) . '/js/custom.js', array( 'jquery' ), time() );
     if ( 'user-new.php' != $hook ) {
         return;
     }
@@ -716,7 +778,7 @@ function get_transaksi(){
             if(!empty($diskon)){
                 $transaksi[$k]['nilai_diskon'] = $diskon[0]['nilai_diskon'].' ('.$diskon[0]['keterangan'].')';
             }
-            $transaksi[$k]['status'] = $transaksi[$k]['status'].'<br><button class="button button-primary" onclick="update_status_laundry();">Edit</button>';
+            $transaksi[$k]['status'] = $transaksi[$k]['status'].'<br><button class="button button-primary" onclick="update_status_laundry('.$v['id'].', this);" data-status="'.$transaksi[$k]['status'].'">Edit</button>';
             $transaksi[$k]['harga'] = buatrp($transaksi[$k]['harga']);
             $no++;
         }
@@ -731,7 +793,8 @@ function get_transaksi(){
         'data'=>$transaksi,
         "draw"=> $_POST['draw'],
         "recordsTotal"=> $total,
-        "recordsFiltered"=> count($transaksi)
+        "recordsFiltered"=> count($transaksi),
+        // "sql" => $qry
     );
     echo json_encode($ret);
     wp_die();

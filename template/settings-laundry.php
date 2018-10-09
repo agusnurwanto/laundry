@@ -7,10 +7,12 @@
 	$parfum_laundry = $wpdb->get_results( 'SELECT * FROM '.$wpdb->prefix.'parfum_laundry', ARRAY_A );
 	$diskon_laundry = $wpdb->get_results( 'SELECT * FROM '.$wpdb->prefix.'diskon_laundry', ARRAY_A );
 	$lama_service = $wpdb->get_results( 'SELECT * FROM '.$wpdb->prefix.'lama_service_laundry', ARRAY_A );
+	//$tipe_kerja = $wpdb->get_result( 'SELECT * FROM'.$wpdb->prefix.'transaksi_pekerja_laundry', ARRAY_A);
 	$tipe = $wpdb->get_results( 'SELECT * FROM '.$wpdb->prefix.'tipe_laundry', ARRAY_A );
 	$default_lama_laundry = get_option('lama_laundry', false);
 	$default_tipe_laundry = get_option('tipe_laundry', false);
 	$default_parfum_laundry = get_option('parfum_laundry', false);
+	//$default_kerja_laundry = get_option('pekerja_laundry',false);
 ?>
 <div class="container">
 	<div class="row"><h1>Settings Laundry</h1></div>
@@ -183,6 +185,6 @@
 					</div>
 		      	</div>
 		    </div>
-	  	</div>
+		</div>
 	</div>
 </div>

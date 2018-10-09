@@ -11,8 +11,8 @@
 	$persentase_laundry = $wpdb->get_results( 'SELECT * FROM '.$wpdb->prefix.'persentase_laundry', ARRAY_A );
 	$bagi_hasil = get_option('rumus_dasar_bagi_hasil');
 ?>
-<div class="container">
-	<div class="row"><h1>Harga Laundry</h1></div>
+<div>
+	<div><h1>Harga Laundry</h1></div>
 	<div class="panel-group" id="accordion-laundry" role="tablist" aria-multiselectable="true">
 	  	<div class="panel panel-default">
 		    <div class="panel-heading" role="tab" id="ac-header-tipe-laundry">
@@ -137,7 +137,7 @@
 		      	<div class="panel-body">
 					<div class="row">
 						<div class="col-md-6">
-							<form>
+							<form action="?page=harga_laundry" type="post">
 							  	<div class="form-group">
 								    <label for="ac-harga-service-tipe-laundry">Tipe Laundry</label>
 								    <select class="form-control" id="ac-harga-service-tipe-laundry">

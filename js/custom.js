@@ -276,6 +276,45 @@ jQuery(document).ready(function(){
 		})
 	});
 
+	jQuery('#input-transaksi-karyawan').on('click', function(e){
+		e.preventDefault();
+		var waktu_laundry = jQuery('#waktu-laundry').val();
+		if(!waktu_laundry)
+			return swal({ title: 'Waktu Laundry belum diisi!', type: 'error'});
+		var karyawan_laundry = jQuery('#karyawan-laundry').val();
+		if(!karyawan_laundry)
+			return swal({ title: 'Karyawan Laundry belum diisi!', type: 'error'});
+		var customer_laundry = jQuery('#customer-laundry').val();
+		if(!customer_laundry)
+			return swal({ title: 'Customer Laundry belum diisi!', type: 'error'});
+		var lama_laundry = jQuery('#lama-laundry').val();
+		if(!lama_laundry)
+			return swal({ title: 'Lama Laundry belum diisi!', type: 'error'});
+		var tipe_laundry = jQuery('#tipe-laundry').val();
+		if(!tipe_laundry)
+			return swal({ title: 'Parfum Laundry belum diisi!', type: 'error'});
+		jQuery.ajax({
+			url: ajaxurl,
+			type: 'POST',
+			data: {
+				action: 'input-transaksi-karyawan',
+				waktu_laundry: waktu_laundry,
+				karyawan_laundry: karyawann_laundry,
+				lama_laundry: lama_laundry,
+				tipe_laundry: tipe_laundry,
+				customer_laundry: customer_laundry
+			},
+			success: function(respone){
+				var data = JSON.parse(respone);
+				if(data.error){
+					swal({ title: data.msg, type: 'error' });
+				}else{
+					swal({ title: data.msg, type: 'success' });
+				}
+			}
+		})
+	});
+
 	jQuery('#input-general-setting-laundry').on('click', function(e){
 		e.preventDefault();
 		var lama_laundry = jQuery('#default-lama-laundry').val();
@@ -439,10 +478,48 @@ Number.prototype.formatMoney = function(c, d, t){
     return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 };
 
-function update_status_laundry(){
-	jQuery('#modal-laporan').modal('show');
+function update_status_laundry(id, that){
+	var modal = jQuery('#modal-laporan');
+	var status = jQuery(that).attr('data-status');
+	var statusProses,statusSelesai = '';
+	if(status == 'proses'){
+		statusProses = 'selected="true"'
+	}else if(status == 'selesai'){
+		statusSelesai = 'selected="true"'
+	}
+	var html = ''
+		+'<form method="POST" data-id="'+id+'" id="modal-update-laundry">'
+			+'<div class="form-group">'
+		  		+'<label for="status-laundry-modal">Status Laundry</label>'
+		  		 +'<select class="form-control" id="status-laundry-modal">'
+                    +'<option value="proses" '+statusProses+'>Proses</option>'
+                    +'<option value="selesai" '+statusSelesai+'>Selesai</option>'
+                +'</select>'
+			+'</div>';
+	modal.find('.modal-body').html(html);
+	modal.modal('show');
 }
 
 function save_edit_transaksi(){
-	
+	var status = jQuery('#status-laundry-modal').val();
+	var idtransaksi = jQuery('#modal-update-laundry').attr('data-id');
+	jQuery.ajax({
+		url: ajaxurl,
+		type: 'POST',
+		data: {
+			action: 'update_status_laundry',
+			status: status,
+			id: idtransaksi
+		},
+		success: function(respone){
+			var data = JSON.parse(respone);
+			if(data.error){
+				swal({ title: data.msg, type: 'error' });
+			}else{
+				jQuery('#view-transaksi-laundry').DataTable().ajax.reload();
+				swal({ title: data.msg, type: 'success' });
+				jQuery('#modal-laporan').modal('hide');
+			}
+		}
+	});
 }

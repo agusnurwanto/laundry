@@ -36,7 +36,9 @@ add_action( 'wp_ajax_update-tipe-laundry', 'update_tipe_laundry' );
 add_action( 'wp_ajax_update-lama-service', 'update_lama_service' );
 add_action( 'wp_ajax_update-jenis-pekerjaan', 'update_jenis_pekerjaan' );
 add_action( 'wp_ajax_update-diskon-laundry', 'update_diskon_laundry' );
+add_action( 'wp_ajax_update_status_laundry', 'update_status_laundry' );
 add_action( 'wp_ajax_input-transaksi-customer', 'input_transaksi_customer' );
+add_action( 'wp_ajax_input-transaksi-karyawan', 'input_transaksi_karyawan' );
 add_action( 'wp_ajax_set-general-setting', 'set_general_setting' );
 add_action( 'wp_ajax_get_transaksi', 'get_transaksi' );
 

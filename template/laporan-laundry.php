@@ -5,9 +5,9 @@
 	}
 	global $wpdb;
 ?>
-<div class="container">
-	<div class="row"><h1>Laporan Laundry</h1></div>
-	<div class="panel-group row" id="accordion-laundry" role="tablist" aria-multiselectable="true">
+<div>
+	<div><h1>Laporan Laundry</h1></div>
+	<div class="panel-group" id="accordion-laundry" role="tablist" aria-multiselectable="true">
 		<div class="panel panel-default">
 		    <div class="panel-heading" role="tab" id="ac-header-view-transkasi-laundry">
 		      	<h4 class="panel-title">

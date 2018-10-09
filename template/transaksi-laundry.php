@@ -16,9 +16,9 @@
 	$default_parfum_laundry = get_option('parfum_laundry', false);
     // echo "<pre>".print_r($tipe, 1)."</pre>";
 ?>
-<div class="container">
-	<div class="row"><h1>Transaksi Customer Laundry</h1></div>
-	<div class="panel-group row" id="accordion-laundry" role="tablist" aria-multiselectable="true">
+<div>
+	<div><h1>Transaksi Customer Laundry</h1></div>
+	<div class="panel-group" id="accordion-laundry" role="tablist" aria-multiselectable="true">
 	  	<div class="panel panel-default">
 		    <div class="panel-heading" role="tab" id="ac-header-transkasi-laundry">
 		      	<h4 class="panel-title">
