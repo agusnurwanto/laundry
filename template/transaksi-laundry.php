@@ -3,6 +3,7 @@
 		echo 'Hi there!  I\'m just a plugin, not much I can do when called directly.';
 		exit;
 	}
+	loading_ajax();
 	global $wpdb;
 	$customers = get_user_laundry(array( 'role' => 'customer' ));
 	$pekerja = get_user_laundry(array( 'role' => array('pekerja', 'administrator') ));
@@ -124,7 +125,7 @@
 							  	</div>
 							  	<div class="form-group">
 								    <label for="keterangan-laundry">Keterangan Laundry</label>
-								    <input type="text" class="form-control" id="keterangan-laundry" placeholder="Keterangan Laundry">
+								    <input type="text" class="form-control" id="keterangan-laundry" placeholder="Keterangan Laundry ( diantar / diambil )">
 							  	</div>
 							  	<div class="form-group">
 								    <label for="diskon-laundry">Diskon Laundry</label>

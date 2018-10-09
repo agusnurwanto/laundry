@@ -3,6 +3,7 @@
 		echo 'Hi there!  I\'m just a plugin, not much I can do when called directly.';
 		exit;
 	}
+	loading_ajax();
 	global $wpdb;
 	$tipe = $wpdb->get_results( 'SELECT * FROM '.$wpdb->prefix.'tipe_laundry', ARRAY_A );
 	$lama_service = $wpdb->get_results( 'SELECT * FROM '.$wpdb->prefix.'lama_service_laundry', ARRAY_A );

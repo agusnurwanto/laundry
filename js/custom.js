@@ -13,6 +13,7 @@ jQuery(document).ready(function(){
 		var satuan = jQuery('#ac-harga-laundry-satuan').val();
 		if(!satuan)
 			return swal({ title: 'Satuan kosong!', type: 'error'});
+		jQuery('#loading-ajax').show();
 		jQuery.ajax({
 			url: ajaxurl,
 			type: 'POST',
@@ -24,6 +25,7 @@ jQuery(document).ready(function(){
 				satuan: satuan
 			},
 			success: function(respone){
+				jQuery('#loading-ajax').hide();
 				var data = JSON.parse(respone);
 				if(data.error){
 					swal({ title: data.msg, type: 'error' });
@@ -45,6 +47,7 @@ jQuery(document).ready(function(){
 		var persentase = jQuery('#ac-persentase-laundry').val();
 		if(!persentase)
 			return swal({ title: 'Persentase kosong!', type: 'error'});
+		jQuery('#loading-ajax').show();
 		jQuery.ajax({
 			url: ajaxurl,
 			type: 'POST',
@@ -55,6 +58,7 @@ jQuery(document).ready(function(){
 				persentase: persentase
 			},
 			success: function(respone){
+				jQuery('#loading-ajax').hide();
 				var data = JSON.parse(respone);
 				if(data.error){
 					swal({ title: data.msg, type: 'error' });
@@ -70,6 +74,7 @@ jQuery(document).ready(function(){
 		var bagi_hasil = jQuery('#ac-rumus-dasar-bagi-hasil').val();
 		if(!bagi_hasil)
 			return swal({ title: 'Bagi Hasil kosong!', type: 'error'});
+		jQuery('#loading-ajax').show();
 		jQuery.ajax({
 			url: ajaxurl,
 			type: 'POST',
@@ -78,6 +83,7 @@ jQuery(document).ready(function(){
 				bagi_hasil: bagi_hasil
 			},
 			success: function(respone){
+				jQuery('#loading-ajax').hide();
 				var data = JSON.parse(respone);
 				if(data.error){
 					swal({ title: data.msg, type: 'error' });
@@ -93,6 +99,7 @@ jQuery(document).ready(function(){
 		var parfum_laundry = jQuery('#tambah-parfum-laundry').val();
 		if(!parfum_laundry)
 			return swal({ title: 'Bagi Hasil kosong!', type: 'error'});
+		jQuery('#loading-ajax').show();
 		jQuery.ajax({
 			url: ajaxurl,
 			type: 'POST',
@@ -101,6 +108,7 @@ jQuery(document).ready(function(){
 				parfum_laundry: parfum_laundry
 			},
 			success: function(respone){
+				jQuery('#loading-ajax').hide();
 				var data = JSON.parse(respone);
 				if(data.error){
 					swal({ title: data.msg, type: 'error' });
@@ -116,6 +124,7 @@ jQuery(document).ready(function(){
 		var tipe_laundry = jQuery('#tambah-tipe-laundry').val();
 		if(!tipe_laundry)
 			return swal({ title: 'Tipe Laundry kosong!', type: 'error'});
+		jQuery('#loading-ajax').show();
 		jQuery.ajax({
 			url: ajaxurl,
 			type: 'POST',
@@ -124,6 +133,7 @@ jQuery(document).ready(function(){
 				tipe_laundry: tipe_laundry
 			},
 			success: function(respone){
+				jQuery('#loading-ajax').hide();
 				var data = JSON.parse(respone);
 				if(data.error){
 					swal({ title: data.msg, type: 'error' });
@@ -139,6 +149,7 @@ jQuery(document).ready(function(){
 		var lama_service = jQuery('#tambah-lama-service').val();
 		if(!lama_service)
 			return swal({ title: 'Tipe Laundry kosong!', type: 'error'});
+		jQuery('#loading-ajax').show();
 		jQuery.ajax({
 			url: ajaxurl,
 			type: 'POST',
@@ -147,6 +158,7 @@ jQuery(document).ready(function(){
 				lama_service: lama_service
 			},
 			success: function(respone){
+				jQuery('#loading-ajax').hide();
 				var data = JSON.parse(respone);
 				if(data.error){
 					swal({ title: data.msg, type: 'error' });
@@ -162,6 +174,7 @@ jQuery(document).ready(function(){
 		var jenis_pekerjaan = jQuery('#tambah-jenis-pekerjaan').val();
 		if(!jenis_pekerjaan)
 			return swal({ title: 'Tipe Laundry kosong!', type: 'error'});
+		jQuery('#loading-ajax').show();
 		jQuery.ajax({
 			url: ajaxurl,
 			type: 'POST',
@@ -170,6 +183,7 @@ jQuery(document).ready(function(){
 				jenis_pekerjaan: jenis_pekerjaan
 			},
 			success: function(respone){
+				jQuery('#loading-ajax').hide();
 				var data = JSON.parse(respone);
 				if(data.error){
 					swal({ title: data.msg, type: 'error' });
@@ -191,6 +205,7 @@ jQuery(document).ready(function(){
 		var keterangan = jQuery('#keterangan-diskon-laundry').val();
 		if(!keterangan)
 			return swal({ title: 'Keterangan Diskon Laundry kosong!', type: 'error'});
+		jQuery('#loading-ajax').show();
 		jQuery.ajax({
 			url: ajaxurl,
 			type: 'POST',
@@ -201,6 +216,7 @@ jQuery(document).ready(function(){
 				keterangan: keterangan,
 			},
 			success: function(respone){
+				jQuery('#loading-ajax').hide();
 				var data = JSON.parse(respone);
 				if(data.error){
 					swal({ title: data.msg, type: 'error' });
@@ -246,6 +262,7 @@ jQuery(document).ready(function(){
 		var tambahan_harga_laundry = jQuery('#tambahan-harga-laundry').val();
 		if(total_laundry == 0)
 			return swal({ title: 'Total Harga Laundry tidak boleh 0!', type: 'error'});
+		jQuery('#loading-ajax').show();
 		jQuery.ajax({
 			url: ajaxurl,
 			type: 'POST',
@@ -266,6 +283,7 @@ jQuery(document).ready(function(){
 				tambahan_harga_laundry: tambahan_harga_laundry
 			},
 			success: function(respone){
+				jQuery('#loading-ajax').hide();
 				var data = JSON.parse(respone);
 				if(data.error){
 					swal({ title: data.msg, type: 'error' });
@@ -284,27 +302,25 @@ jQuery(document).ready(function(){
 		var karyawan_laundry = jQuery('#karyawan-laundry').val();
 		if(!karyawan_laundry)
 			return swal({ title: 'Karyawan Laundry belum diisi!', type: 'error'});
-		var customer_laundry = jQuery('#customer-laundry').val();
-		if(!customer_laundry)
-			return swal({ title: 'Customer Laundry belum diisi!', type: 'error'});
-		var lama_laundry = jQuery('#lama-laundry').val();
-		if(!lama_laundry)
-			return swal({ title: 'Lama Laundry belum diisi!', type: 'error'});
-		var tipe_laundry = jQuery('#tipe-laundry').val();
-		if(!tipe_laundry)
-			return swal({ title: 'Parfum Laundry belum diisi!', type: 'error'});
+		var jenis_pekerjaan = jQuery('#jenis_pekerjaan').val();
+		if(!jenis_pekerjaan)
+			return swal({ title: 'Jenis Pekerjaan Laundry belum dipilih!', type: 'error'});
+		var transaksi_id = jQuery('#transaksi-laundry').val();
+		if(!transaksi_id)
+			return swal({ title: 'Transkasi Laundry belum dipilih!', type: 'error'});
+		jQuery('#loading-ajax').show();
 		jQuery.ajax({
 			url: ajaxurl,
 			type: 'POST',
 			data: {
 				action: 'input-transaksi-karyawan',
 				waktu_laundry: waktu_laundry,
-				karyawan_laundry: karyawann_laundry,
-				lama_laundry: lama_laundry,
-				tipe_laundry: tipe_laundry,
-				customer_laundry: customer_laundry
+				karyawan_laundry: karyawan_laundry,
+				jenis_pekerjaan: jenis_pekerjaan,
+				transaksi_id: transaksi_id
 			},
 			success: function(respone){
+				jQuery('#loading-ajax').hide();
 				var data = JSON.parse(respone);
 				if(data.error){
 					swal({ title: data.msg, type: 'error' });
@@ -326,6 +342,7 @@ jQuery(document).ready(function(){
 		var default_parfum_laundry = jQuery('#default-parfum-laundry').val();
 		if(!default_parfum_laundry)
 			return swal({ title: 'Parfum Laundry belum dipilih!', type: 'error'});
+		jQuery('#loading-ajax').show();
 		jQuery.ajax({
 			url: ajaxurl,
 			type: 'POST',
@@ -336,6 +353,7 @@ jQuery(document).ready(function(){
 				default_parfum_laundry: default_parfum_laundry,
 			},
 			success: function(respone){
+				jQuery('#loading-ajax').hide();
 				var data = JSON.parse(respone);
 				if(data.error){
 					swal({ title: data.msg, type: 'error' });
@@ -401,6 +419,7 @@ jQuery(document).ready(function(){
 	jQuery('#tambahan-harga-laundry').on('change', function(){
 		generateHarga();
 	});
+	jQuery(".chosen-select").chosen();
 });
 
 function generateWaktuLaundry(options){
@@ -500,9 +519,32 @@ function update_status_laundry(id, that){
 	modal.modal('show');
 }
 
+function update_status_karyawan(id, that){
+	var modal = jQuery('#modal-laporan');
+	var status = jQuery(that).attr('data-status');
+	var statusProses,statusSelesai = '';
+	if(status == '0'){
+		statusProses = 'selected="true"'
+	}else if(status == '1'){
+		statusSelesai = 'selected="true"'
+	}
+	var html = ''
+		+'<form method="POST" data-id="'+id+'" id="modal-update-laundry">'
+			+'<div class="form-group">'
+		  		+'<label for="status-laundry-modal">Status Laundry</label>'
+		  		 +'<select class="form-control" id="status-laundry-modal">'
+                    +'<option value="0" '+statusProses+'>Belum Dibayar</option>'
+                    +'<option value="1" '+statusSelesai+'>Sudah Dibayar</option>'
+                +'</select>'
+			+'</div>';
+	modal.find('.modal-body').html(html);
+	modal.modal('show');
+}
+
 function save_edit_transaksi(){
 	var status = jQuery('#status-laundry-modal').val();
 	var idtransaksi = jQuery('#modal-update-laundry').attr('data-id');
+	jQuery('#loading-ajax').show();
 	jQuery.ajax({
 		url: ajaxurl,
 		type: 'POST',
@@ -512,11 +554,38 @@ function save_edit_transaksi(){
 			id: idtransaksi
 		},
 		success: function(respone){
+			jQuery('#loading-ajax').hide();
 			var data = JSON.parse(respone);
 			if(data.error){
 				swal({ title: data.msg, type: 'error' });
 			}else{
 				jQuery('#view-transaksi-laundry').DataTable().ajax.reload();
+				swal({ title: data.msg, type: 'success' });
+				jQuery('#modal-laporan').modal('hide');
+			}
+		}
+	});
+}
+
+function save_edit_transaksi_karyawan(){
+	var status = jQuery('#status-laundry-modal').val();
+	var idtransaksi = jQuery('#modal-update-laundry').attr('data-id');
+	jQuery('#loading-ajax').show();
+	jQuery.ajax({
+		url: ajaxurl,
+		type: 'POST',
+		data: {
+			action: 'update_status_transaksi_karyawan',
+			status: status,
+			id: idtransaksi
+		},
+		success: function(respone){
+			jQuery('#loading-ajax').hide();
+			var data = JSON.parse(respone);
+			if(data.error){
+				swal({ title: data.msg, type: 'error' });
+			}else{
+				jQuery('#view-transaksi-karyawan').DataTable().ajax.reload();
 				swal({ title: data.msg, type: 'success' });
 				jQuery('#modal-laporan').modal('hide');
 			}

@@ -3,15 +3,17 @@
 		echo 'Hi there!  I\'m just a plugin, not much I can do when called directly.';
 		exit;
 	}
+	loading_ajax();
 	global $wpdb;
-	$karyawan = get_user_laundry (array('role' => 'pekerja'));
-	$customers = get_user_laundry (array('role' => 'customer'));
+	$karyawan = get_user_laundry(array( 'role' => array('pekerja', 'administrator') ));
+	$transaksi = get_transaksi_laundry (array('status' => 'proses'));
 	$tipe = $wpdb->get_results( 'SELECT * FROM '.$wpdb->prefix.'tipe_laundry', ARRAY_A );
 	//$tipe_kerja = $wpdb->get_result( 'SELECT * FROM'.$wpdb->prefix.'transaksi_pekerja_laundry');
 	$lama_service = $wpdb->get_results( 'SELECT * FROM '.$wpdb->prefix.'lama_service_laundry', ARRAY_A );
 	//$default_pekerja_laundry = get_option('pekerja_laundry',false);
 	$default_tipe_laundry = get_option('tipe_laundry', false);
 	$default_lama_laundry = get_option('lama_laundry', false);
+	$pekerjaan = $wpdb->get_results('SELECT * FROM `'.$wpdb->prefix.'jenis_pekerjaan_laundry` order by nama ASC', ARRAY_A);
 ?>
 
 <div>
@@ -31,7 +33,7 @@
 						<div class="col-md-6">
 							<form method="POST">
 								<div class="form-group">
-							  		<label for="waktu-laundry">Waktu Laundry</label>
+							  		<label for="waktu-laundry">Waktu Pengerjaan</label>
 							  		 <div class='input-group date' id='datetimepicker1'>
 					                    <input type='text' class="form-control" id="waktu-laundry" placeholder="Waktu Pengerjaan Laundry"/>
 					                    <span class="input-group-addon">
@@ -53,47 +55,27 @@
 									<a href='<?php echo admin_url(); ?>user-new.php'>Tambah</a>
 								</div>
 								<div class="form-group">
-									<label for="costumer-laundry">Nama Customer</label>
-									<select id="customer-laundry" class="form-control chosen-select">
-										<option value="">Pilih Customer</option>
+									<label for="jenis_pekerjaan">Jenis Pekerjaan Laundry</label>
+									<select id="jenis_pekerjaan" class="form-control chosen-select">
+										<option value="">Pilih Pekerjaan</option>
 									<?php
-										foreach ($customers as $customer) {
-											echo '<option value="'.$customer['id'].'">'.$customer['display_name'].' | '.$customer['alamat'].' | '.$customer['no_hp'].'</option>';
+										foreach ($pekerjaan as $p) {
+											echo '<option value="'.$p['id'].'">'.$p['nama'].'</option>';
 										}
-									?>
+									?>	
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="lama-laundry">Lama Laundry</label>
-									<select class="form-control" id="lama-laundry">
-										<option value="">Select Lama Laundry</option>
+									<label for="transaksi-laundry">Transaksi Laundry</label>
+									<select id="transaksi-laundry" class="form-control chosen-select">
+										<option value="">Pilih Transaksi</option>
 									<?php
-										if(!empty($lama_service)){
-											foreach ($lama_service as $k => $v){
-												$selected = '';
-												if($default_lama_laundry == $v['id']){
-													$selected = 'selected';
-												}
-												echo '<option value="'.$v['id'].'" '.$selected.'>'.$v['nama'].'</option>';
-											}
-								    	}
-									?>									
-									</select>
-								</div>
-								<div class="form-group">
-								    <label for="tipe-laundry">Tipe Laundry</label>
-								    <select class="form-control" id="tipe-laundry">
-								    	<option value="">Select Tipe Laundry</option>
-								 	<?php
-								    	if(!empty($tipe)){
-											foreach ($tipe as $k => $v){
-												$selected = '';
-												if($default_tipe_laundry == $v['id']){
-													$selected = 'selected';
-												}
-												echo '<option value="'.$v['id'].'" '.$selected.'>'.$v['nama'].'</option>';
-											}
-								    	}
+										foreach ($transaksi as $t) {
+									        $alamat = get_usermeta($t['customer_id'], 'alamat');
+									        $no_hp = get_usermeta($t['customer_id'], 'no_hp');
+									        $waktu_masuk = $t['waktu_masuk'];
+											echo '<option value="'.$t['id'].'">'.$waktu_masuk.' | '.$t['customer'].' | '.$t['tipe'].' | '.$t['lama'].' | '.$alamat.' | '.$no_hp.'</option>';
+										}
 									?>
 									</select>
 								</div>

@@ -7,13 +7,13 @@
 	loading_ajax();
 ?>
 <div>
-	<div><h1>Laporan Laundry</h1></div>
+	<div><h1>Laporan Karyawan</h1></div>
 	<div class="panel-group" id="accordion-laundry" role="tablist" aria-multiselectable="true">
 		<div class="panel panel-default">
 		    <div class="panel-heading" role="tab" id="ac-header-view-transkasi-laundry">
 		      	<h4 class="panel-title">
 			        <a role="button" data-toggle="collapse" data-parent="#accordion-laundry" href="#ac-view-transkasi-laundry" aria-expanded="true" aria-controls="ac-view-transkasi-laundry">
-			          Transaksi Laundry
+			          Transaksi Karyawan
 			        </a>
 		      	</h4>
 		    </div>
@@ -27,21 +27,15 @@
 					  	</div>
 					</form>
 					<div id="style-table"></div>
-					<table class="table table-bordered table-striped table-hover table-condensed" id="view-transaksi-laundry">
+					<table class="table table-bordered table-striped table-hover table-condensed" id="view-transaksi-karyawan">
 						<thead>
 							<tr>
 								<th id="th_no">No</th>
-								<th id="th_kustomer">Kustomer</th>
+								<th id="th_customer">Karyawan</th>
 								<th id="th_pekerja">Pekerja</th>
 								<th id="th_waktu_pengerjaan">Waktu Pengerjaan</th>
-								<th id="th_parfum">Parfum</th>
-								<th id="th_tipe_laundry">Tipe Laundry</th>
-								<th id="th_lama_service">Lama Service</th>
-								<th id="th_berat">Berat</th>
-								<th id="th_tambahan">Tambahan</th>
-								<th id="th_diskon">Diskon</th>
-								<th id="th_total">Total</th>
-								<th id="th_keterangan">Keterangan</th>
+								<th id="th_jenis_pekerjaan">Jenis Pekerjaan</th>
+								<th id="th_detail_transaksi">Detail Transaksi Laundry</th>
 								<th id="th_status">Status</th>
 							</tr>
 						</thead>
@@ -62,7 +56,7 @@
 	        'url': laundry_config.ajax_url,
 	        'type': 'POST',
 	        'data': {
-	            'action': 'get_transaksi'
+	            'action': 'get_transaksi_karyawan'
 	        }
 	    },
 	    "columns": [
@@ -70,14 +64,8 @@
 	        { "data": "customer" },
 	        { "data": "pekerja" },
 	        { "data": "waktu_pengerjaan" },
-	        { "data": "parfum" },
-	        { "data": "tipe" },
-	        { "data": "lama" },
-	        { "data": "berat" },
-	        { "data": "tambahan_harga" },
-	        { "data": "nilai_diskon" },
-	        { "data": "harga" },
-	        { "data": "keterangan" },
+	        { "data": "jenis_pekerjaan" },
+	        { "data": "detail_transaksi" },
 	        { "data": "status" }
 	    ],
 	    "dom": 'lBrtip',
@@ -86,7 +74,7 @@
         ],
         "footerCallback": function ( row, data, start, end, display ) {
         	var style = '<style>';
-            jQuery('#view-transaksi-laundry thead th').map(function(no, b){
+            jQuery('#view-transaksi-karyawan thead th').map(function(no, b){
                 var id = jQuery(this).attr('id');
                 var align = 'left';
                 if(
@@ -103,14 +91,14 @@
                 ){
                     align = 'right';
                 }
-                style += '#view-transaksi-laundry tbody td:nth-child('+(no+1)+'){ text-align: '+align+' !important; }';
+                style += '#view-transaksi-karyawan tbody td:nth-child('+(no+1)+'){ text-align: '+align+' !important; }';
             });
             style += '</style>';
             jQuery('#style-table').html(style);
         }
 	}
 	jQuery(document).ready(function(){
-		jQuery('#view-transaksi-laundry').dataTable(options);	
+		jQuery('#view-transaksi-karyawan').dataTable(options);	
 	});
 </script>
 
@@ -125,7 +113,7 @@
       <div class="modal-body"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="save_edit_transaksi();">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="save_edit_transaksi_karyawan();">Save changes</button>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@
 		echo 'Hi there!  I\'m just a plugin, not much I can do when called directly.';
 		exit;
 	}
+	loading_ajax();
 	global $wpdb;
 	$parfum_laundry = $wpdb->get_results( 'SELECT * FROM '.$wpdb->prefix.'parfum_laundry', ARRAY_A );
 	$diskon_laundry = $wpdb->get_results( 'SELECT * FROM '.$wpdb->prefix.'diskon_laundry', ARRAY_A );
